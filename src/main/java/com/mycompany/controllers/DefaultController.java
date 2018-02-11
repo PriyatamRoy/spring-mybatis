@@ -5,9 +5,12 @@
  */
 package com.mycompany.controllers;
 
+import com.mycompany.entity.User;
+import com.mycompany.mapper.UserMapper;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,13 +23,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class DefaultController {
+    
+    @Autowired
+    UserMapper userMapper;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap map) {
-        map.put("msg", "Hello Spring 4 Web MVC!");
+        
+        List<User> users = userMapper.getAllUsers();
+        System.out.println(users.toString());
+        map.put("msg", users.toString());
         return "index";
     }
-    
+
 //    @RequestMapping(value = "/getall", method = RequestMethod.GET)
 //    public @ResponseBody Map<String, String> index() {
 //        Map<String, String> hm = new HashMap<>();
