@@ -32,7 +32,7 @@ public class DefaultController {
         
         List<User> users = userMapper.getAllUsers();
         System.out.println(users.toString());
-        map.put("msg", users.toString());
+        map.put("users", users);
         return "index";
     }
 
